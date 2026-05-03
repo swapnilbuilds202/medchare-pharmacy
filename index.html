@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedCare Pharmacy — Dharamsala</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #0f6e3a; --green-light: #e8f5ee; --green-mid: #2d9e5f;
+      --cream: #fafaf7; --dark: #111a14; --gray: #6b7c6e;
+      --border: #d8e8dc; --red: #c0392b; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+    /* NAV */
+    nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 12px rgba(0,0,0,.05); }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--green); text-decoration: none; }
+    .logo-icon { width: 34px; height: 34px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--gray); font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta { background: var(--green); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+    .nav-cta:hover { background: #0a5430; }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); color: var(--green); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.2rem; }
+    .dot { width: 7px; height: 7px; background: var(--green-mid); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    h1 { font-family: 'DM Serif Display', serif; font-size: 44px; line-height: 1.15; color: var(--dark); margin-bottom: 1rem; }
+    h1 em { color: var(--green); font-style: italic; }
+    .hero-sub { color: var(--gray); font-size: 16px; line-height: 1.75; margin-bottom: 2rem; font-weight: 300; max-width: 480px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: var(--green); color: white; border: none; padding: 13px 26px; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+    .btn-primary:hover { background: #0a5430; }
+    .btn-secondary { background: transparent; color: var(--green); border: 1.5px solid var(--green); padding: 13px 26px; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+    .btn-secondary:hover { background: var(--green-light); }
+
+    /* HERO CARD */
+    .hero-visual { background: linear-gradient(135deg, var(--green-light), #d0ead9); border-radius: 24px; padding: 2rem; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+    .hero-visual::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; background:var(--green-mid); opacity:.07; border-radius:50%; }
+    .med-card { background: white; border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.07); animation: floatUp .6s ease both; }
+    .med-card:nth-child(2){animation-delay:.1s} .med-card:nth-child(3){animation-delay:.2s}
+    @keyframes floatUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .med-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .med-info { flex: 1; }
+    .med-name { font-size: 13px; font-weight: 500; color: var(--dark); }
+    .med-detail { font-size: 11px; color: var(--gray); margin-top: 2px; }
+    .stock-badge { font-size: 10px; padding: 3px 9px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
+    .in-stock { background: #e8f5ee; color: var(--green); }
+    .low-stock { background: #fff3e0; color: #e65100; }
+
+    /* STATS */
+    .stats { background: var(--green); padding: 3rem 2rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; text-align: center; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 34px; color: white; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,.7); margin-top: 5px; }
+
+    /* SECTIONS */
+    .section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-tag { font-size: 12px; font-weight: 500; color: var(--green); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: 34px; margin-bottom: .5rem; }
+    .section-sub { color: var(--gray); font-size: 15px; margin-bottom: 2.5rem; font-weight: 300; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .service-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all .2s; }
+    .service-card:hover { border-color: var(--green-mid); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,110,58,.1); }
+    .svc-icon { width: 46px; height: 46px; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 1rem; }
+    .svc-title { font-size: 15px; font-weight: 500; margin-bottom: .5rem; }
+    .svc-desc { font-size: 13px; color: var(--gray); line-height: 1.65; font-weight: 300; }
+
+    /* HOURS */
+    .hours-section { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+    .hours-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: 12px 0; font-size: 14px; color: var(--gray); }
+    .hours-table td:last-child { text-align: right; font-weight: 500; color: var(--dark); }
+    .today-badge { background: var(--green-light); color: var(--green); font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-left: 6px; font-weight: 500; }
+    .contact-box { background: var(--green-light); border-radius: 20px; padding: 1.75rem; }
+    .contact-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(15,110,58,.15); }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon { width: 38px; height: 38px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0; }
+    .contact-label { font-size: 11px; color: var(--gray); }
+    .contact-val { font-size: 14px; font-weight: 500; color: var(--dark); margin-top: 1px; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--green-light); padding: 4rem 2rem; }
+    .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 2rem; }
+    .review-card { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border); }
+    .stars { color: #f59e0b; font-size: 14px; margin-bottom: .75rem; }
+    .review-text { font-size: 13px; color: var(--gray); line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+    .reviewer { display: flex; align-items: center; gap: 10px; }
+    .reviewer-avatar { width: 36px; height: 36px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 500; }
+    .reviewer-name { font-size: 13px; font-weight: 500; }
+    .reviewer-loc { font-size: 11px; color: var(--gray); }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,.5); text-align: center; padding: 2rem; font-size: 13px; }
+    footer span { color: var(--green-mid); }
+
+    /* CHATBOT */
+    .chat-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 999; }
+    .chat-toggle { width: 58px; height: 58px; background: var(--green); border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 20px rgba(15,110,58,.4); transition: transform .2s; }
+    .chat-toggle:hover { transform: scale(1.08); }
+    .chat-window { position: absolute; bottom: 72px; right: 0; width: 340px; background: white; border-radius: 22px; box-shadow: 0 8px 40px rgba(0,0,0,.15); overflow: hidden; display: none; flex-direction: column; border: 1px solid var(--border); }
+    .chat-window.open { display: flex; }
+    .chat-header { background: var(--green); padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+    .chat-avatar { width: 38px; height: 38px; background: rgba(255,255,255,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .chat-name { color: white; font-size: 14px; font-weight: 500; }
+    .chat-status { color: rgba(255,255,255,.7); font-size: 11px; margin-top: 1px; }
+    .chat-close { color: white; background: none; border: none; font-size: 18px; cursor: pointer; margin-left: auto; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; max-height: 320px; min-height: 180px; }
+    .msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.6; animation: msgIn .2s ease; }
+    @keyframes msgIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .msg.bot { background: var(--green-light); color: var(--dark); border-bottom-left-radius: 4px; align-self: flex-start; }
+    .msg.user { background: var(--green); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
+    .typing-dots { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+    .typing-dots span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: bounce .8s infinite; }
+    .typing-dots span:nth-child(2){animation-delay:.15s} .typing-dots span:nth-child(3){animation-delay:.3s}
+    @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-5px)} }
+    .quick-replies { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px; }
+    .qr { font-size: 11px; padding: 5px 11px; border-radius: 20px; border: 1px solid var(--green); color: var(--green); background: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s; }
+    .qr:hover { background: var(--green-light); }
+    .chat-input-row { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+    .chat-input { flex: 1; border: 1px solid var(--border); border-radius: 10px; padding: 9px 13px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; color: var(--dark); background: var(--cream); }
+    .chat-input:focus { border-color: var(--green); }
+    .chat-send { background: var(--green); color: white; border: none; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .chat-send:hover { background: #0a5430; }
+    .unread { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; background: var(--red); border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 9px; color: white; font-weight: 600; }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-visual { display: none; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .hours-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      h1 { font-size: 32px; }
+      .chat-window { width: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-icon">✚</div>
+    MedCare Pharmacy
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#hours">Timings</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="toggleChat()">💬 Ask AI</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-tag"><div class="dot"></div> Open today · 8am – 10pm</div>
+    <h1>Your trusted <em>pharmacy,</em> now smarter.</h1>
+    <p class="hero-sub">Get medicine availability, pricing, and health advice instantly — 24/7 — with our AI assistant. No waiting on hold. No confusion.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="toggleChat()">Check Medicine Stock</button>
+      <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView()">Talk to Pharmacist</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="med-card">
+      <div class="med-icon" style="background:#e8f5ee">💊</div>
+      <div class="med-info">
+        <div class="med-name">Paracetamol 500mg</div>
+        <div class="med-detail">Strip of 10 · ₹18</div>
+      </div>
+      <span class="stock-badge in-stock">In Stock</span>
+    </div>
+    <div class="med-card">
+      <div class="med-icon" style="background:#fff3e0">🩺</div>
+      <div class="med-info">
+        <div class="med-name">Azithromycin 250mg</div>
+        <div class="med-detail">Strip of 6 · ₹85</div>
+      </div>
+      <span class="stock-badge low-stock">Low Stock</span>
+    </div>
+    <div class="med-card">
+      <div class="med-icon" style="background:#e8f5ee">🩹</div>
+      <div class="med-info">
+        <div class="med-name">Cetirizine 10mg</div>
+        <div class="med-detail">Strip of 10 · ₹22</div>
+      </div>
+      <span class="stock-badge in-stock">In Stock</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div><div class="stat-num">2,400+</div><div class="stat-label">Medicines in stock</div></div>
+  <div><div class="stat-num">14 yrs</div><div class="stat-label">Serving the community</div></div>
+  <div><div class="stat-num">24/7</div><div class="stat-label">AI assistant available</div></div>
+  <div><div class="stat-num">98%</div><div class="stat-label">Customer satisfaction</div></div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="section-tag">What we offer</div>
+  <div class="section-title">Everything you need, one place</div>
+  <p class="section-sub">From prescription medicines to health consultations — we've got you covered.</p>
+  <div class="services-grid">
+    <div class="service-card"><div class="svc-icon">💊</div><div class="svc-title">Prescription Medicines</div><div class="svc-desc">All major brands and generics. Upload your prescription and we'll have it ready.</div></div>
+    <div class="service-card"><div class="svc-icon">🚚</div><div class="svc-title">Home Delivery</div><div class="svc-desc">Get medicines delivered to your door within 2 hours across the area.</div></div>
+    <div class="service-card"><div class="svc-icon">🤖</div><div class="svc-title">AI Medicine Assistant</div><div class="svc-desc">Ask about availability, dosage, side effects, and alternatives — instantly, any time.</div></div>
+    <div class="service-card"><div class="svc-icon">🩺</div><div class="svc-title">Health Consultations</div><div class="svc-desc">Book a free 15-minute consultation with our licensed pharmacist.</div></div>
+    <div class="service-card"><div class="svc-icon">🧪</div><div class="svc-title">Lab Test Booking</div><div class="svc-desc">Book blood tests and diagnostics at partner labs with home sample collection.</div></div>
+    <div class="service-card"><div class="svc-icon">♻️</div><div class="svc-title">Medicine Refills</div><div class="svc-desc">Set automatic refill reminders so you never run out of your regular medicines.</div></div>
+  </div>
+</div>
+
+<!-- HOURS -->
+<div class="hours-section" id="hours">
+  <div class="hours-inner">
+    <div>
+      <div class="section-tag">Timings</div>
+      <div class="section-title">We're open when you need us</div>
+      <p class="section-sub" style="margin-bottom:1.5rem">Walk in or call ahead — we're here 7 days a week.</p>
+      <table class="hours-table">
+        <tr><td>Monday – Friday <span class="today-badge">Today</span></td><td>8:00 AM – 10:00 PM</td></tr>
+        <tr><td>Saturday</td><td>8:00 AM – 9:00 PM</td></tr>
+        <tr><td>Sunday</td><td>10:00 AM – 6:00 PM</td></tr>
+        <tr><td>Public Holidays</td><td>10:00 AM – 4:00 PM</td></tr>
+      </table>
+    </div>
+    <div class="contact-box" id="contact">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div><div class="contact-label">Phone</div><div class="contact-val">+91 98765 43210</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div><div class="contact-label">Address</div><div class="contact-val">Main Bazaar, Dharamsala, HP</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div><div class="contact-label">WhatsApp</div><div class="contact-val">+91 98765 43210</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div><div class="contact-label">Email</div><div class="contact-val">hello@medcarepharma.in</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-tag">Reviews</div>
+    <div class="section-title">What our customers say</div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"The AI chatbot told me exactly which medicine to get for my son's fever at 2am. Incredible service — didn't have to wake anyone up!"</p>
+        <div class="reviewer"><div class="reviewer-avatar">R</div><div><div class="reviewer-name">Rahul Sharma</div><div class="reviewer-loc">Dharamsala</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Home delivery in under 90 minutes. The pharmacist called to double-check my prescription. Very professional and caring staff."</p>
+        <div class="reviewer"><div class="reviewer-avatar">P</div><div><div class="reviewer-name">Priya Mehta</div><div class="reviewer-loc">McLeod Ganj</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Best pharmacy in Dharamsala. They always have stock when others don't, and the AI assistant is genuinely helpful for medicine queries."</p>
+        <div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Amit Thakur</div><div class="reviewer-loc">Dharamsala</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 MedCare Pharmacy, Dharamsala · Built with <span>♥</span> · Powered by AI</p>
+  <p style="margin-top:6px;font-size:11px">This is a demo website built by Swapnil Thakur · swapnil_builds on Fiverr</p>
+</footer>
+
+<!-- CHATBOT -->
+<div class="chat-bubble">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">💊</div>
+      <div class="chat-header-info">
+        <div class="chat-name">MedCare AI Assistant</div>
+        <div class="chat-status">● Online · Replies instantly</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="quick-replies" id="quickReplies">
+      <button class="qr" onclick="sendQuick('Is paracetamol available?')">Paracetamol?</button>
+      <button class="qr" onclick="sendQuick('What are your timings?')">Timings</button>
+      <button class="qr" onclick="sendQuick('Do you deliver at home?')">Home delivery?</button>
+      <button class="qr" onclick="sendQuick('I have a fever, what medicine?')">Fever help</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about medicines, stock, timings..." onkeydown="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" onclick="toggleChat()" id="chatToggle">💬</button>
+  <div class="unread" id="unreadBadge">1</div>
+</div>
+
+<script>
+const SYSTEM = `You are a friendly AI assistant for MedCare Pharmacy in Dharamsala, Himachal Pradesh, India. Help customers with:
+- Medicine availability: Paracetamol 500mg ₹18/strip, Azithromycin 250mg ₹85/strip, Cetirizine 10mg ₹22/strip, Metformin 500mg ₹35/strip, Omeprazole 20mg ₹28/strip, Amoxicillin 500mg ₹65/strip, Ibuprofen 400mg ₹20/strip, Dolo 650 ₹30/strip
+- Timings: Mon-Fri 8am-10pm, Sat 8am-9pm, Sun 10am-6pm, Holidays 10am-4pm
+- Home delivery within 2 hours in Dharamsala area
+- Basic health advice for common symptoms
+- WhatsApp: +91 98765 43210
+Keep replies SHORT (2-4 sentences), warm, helpful. Use ₹ for prices. For serious conditions always suggest seeing a doctor.`;
+
+let msgs = [], open = false;
+
+function toggleChat() {
+  open = !open;
+  document.getElementById('chatWindow').classList.toggle('open', open);
+  document.getElementById('unreadBadge').style.display = 'none';
+  if (open && msgs.length === 0) {
+    setTimeout(() => addBot("Namaste! 🙏 I'm your MedCare AI assistant. Ask me about medicine availability, prices, timings, or health advice. How can I help you today?"), 400);
+  }
+}
+
+function addBot(text) {
+  const el = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'msg bot'; d.textContent = text;
+  el.appendChild(d); el.scrollTop = el.scrollHeight;
+  msgs.push({role:'assistant', content: text});
+}
+
+function addUser(text) {
+  const el = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'msg user'; d.textContent = text;
+  el.appendChild(d); el.scrollTop = el.scrollHeight;
+  msgs.push({role:'user', content: text});
+}
+
+function showTyping() {
+  const el = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'msg bot'; d.id = 'typing';
+  d.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  el.appendChild(d); el.scrollTop = el.scrollHeight;
+}
+
+function hideTyping() { const t = document.getElementById('typing'); if(t) t.remove(); }
+
+function sendQuick(text) { document.getElementById('quickReplies').style.display='none'; send(text); }
+function sendMessage() { const i = document.getElementById('chatInput'); const t = i.value.trim(); if(!t) return; i.value=''; send(t); }
+
+async function send(text) {
+  addUser(text); showTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: SYSTEM,
+        messages: msgs.slice(-10)
+      })
+    });
+    const data = await res.json();
+    hideTyping();
+    const reply = data.content?.find(b=>b.type==='text')?.text || "Sorry, having trouble connecting. Call us at +91 98765 43210!";
+    addBot(reply);
+  } catch(e) {
+    hideTyping();
+    addBot("Sorry, I'm offline right now. Please WhatsApp us at +91 98765 43210!");
+  }
+}
+</script>
+</body>
+</html>
