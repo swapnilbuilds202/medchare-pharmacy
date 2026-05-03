@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="MedCare Pharmacy Dharamsala — medicines, home delivery, AI assistant and health consultations available 7 days a week."/>
+  <meta property="og:title" content="MedCare Pharmacy Dharamsala"/>
+  <meta property="og:description" content="Your trusted pharmacy, now smarter. AI-powered medicine assistant available 24/7."/>
+  <title>MedCare Pharmacy — Dharamsala</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Local Business Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Pharmacy",
+    "name": "MedCare Pharmacy",
+    "address": { "@type": "PostalAddress", "streetAddress": "Main Bazaar", "addressLocality": "Dharamsala", "addressRegion": "Himachal Pradesh", "addressCountry": "IN" },
+    "telephone": "+91-98765-43210",
+    "openingHours": ["Mo-Fr 08:00-22:00", "Sa 08:00-21:00", "Su 10:00-18:00"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav aria-label="Main navigation">
+    <a class="logo" href="#">
+      <div class="logo-icon" aria-hidden="true">✚</div>
+      MedCare Pharmacy
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#hours">Timings</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    <button class="nav-cta" onclick="toggleChat()">💬 Ask AI</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-text">
+    <div class="hero-tag"><div class="dot" aria-hidden="true"></div> Open today · 8am – 10pm</div>
+    <h1>Your trusted <em>pharmacy,</em> now smarter.</h1>
+    <p class="hero-sub">Get medicine availability, pricing, and health advice instantly — 24/7 — with our AI assistant. No waiting on hold. No confusion.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="toggleChat()">Check Medicine Stock</button>
+      <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Talk to Pharmacist</button>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <article class="med-card">
+      <div class="med-icon" style="background:#e8f5ee">💊</div>
+      <div class="med-info">
+        <div class="med-name">Paracetamol 500mg</div>
+        <div class="med-detail">Strip of 10 · ₹18</div>
+      </div>
+      <span class="stock-badge in-stock">In Stock</span>
+    </article>
+    <article class="med-card">
+      <div class="med-icon" style="background:#fff3e0">🩺</div>
+      <div class="med-info">
+        <div class="med-name">Azithromycin 250mg</div>
+        <div class="med-detail">Strip of 6 · ₹85</div>
+      </div>
+      <span class="stock-badge low-stock">Low Stock</span>
+    </article>
+    <article class="med-card">
+      <div class="med-icon" style="background:#e8f5ee">🩹</div>
+      <div class="med-info">
+        <div class="med-name">Cetirizine 10mg</div>
+        <div class="med-detail">Strip of 10 · ₹22</div>
+      </div>
+      <span class="stock-badge in-stock">In Stock</span>
+    </article>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" aria-label="Statistics">
+  <div class="stat"><div class="stat-num">2,400+</div><div class="stat-label">Medicines in stock</div></div>
+  <div class="stat"><div class="stat-num">14 yrs</div><div class="stat-label">Serving the community</div></div>
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">AI assistant available</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Customer satisfaction</div></div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" aria-label="Services">
+  <div class="section-tag">What we offer</div>
+  <h2 class="section-title">Everything you need, one place</h2>
+  <p class="section-sub">From prescription medicines to health consultations — we've got you covered.</p>
+  <div class="services-grid">
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">💊</div><h3 class="svc-title">Prescription Medicines</h3><p class="svc-desc">All major brands and generics. Upload your prescription and we'll have it ready.</p></article>
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">🚚</div><h3 class="svc-title">Home Delivery</h3><p class="svc-desc">Get medicines delivered to your door within 2 hours across the area.</p></article>
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">🤖</div><h3 class="svc-title">AI Medicine Assistant</h3><p class="svc-desc">Ask about availability, dosage, side effects, and alternatives — instantly, any time.</p></article>
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">🩺</div><h3 class="svc-title">Health Consultations</h3><p class="svc-desc">Book a free 15-minute consultation with our licensed pharmacist.</p></article>
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">🧪</div><h3 class="svc-title">Lab Test Booking</h3><p class="svc-desc">Book blood tests at partner labs with home sample collection.</p></article>
+    <article class="service-card"><div class="svc-icon" aria-hidden="true">♻️</div><h3 class="svc-title">Medicine Refills</h3><p class="svc-desc">Set automatic refill reminders so you never run out of your regulars.</p></article>
+  </div>
+</section>
+
+<!-- HOURS & CONTACT -->
+<section class="hours-section" id="hours" aria-label="Opening hours and contact">
+  <div class="hours-inner">
+    <div>
+      <div class="section-tag">Timings</div>
+      <h2 class="section-title">We're open when you need us</h2>
+      <p class="section-sub" style="margin-bottom:1.5rem">Walk in or call ahead — 7 days a week.</p>
+      <table class="hours-table" aria-label="Opening hours">
+        <tbody>
+          <tr><td>Monday – Friday <span class="today-badge">Today</span></td><td>8:00 AM – 10:00 PM</td></tr>
+          <tr><td>Saturday</td><td>8:00 AM – 9:00 PM</td></tr>
+          <tr><td>Sunday</td><td>10:00 AM – 6:00 PM</td></tr>
+          <tr><td>Public Holidays</td><td>10:00 AM – 4:00 PM</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="contact-box" id="contact">
+      <div class="contact-item">
+        <div class="contact-icon" aria-hidden="true">📞</div>
+        <div><div class="contact-label">Phone</div><div class="contact-val">+91 98765 43210</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" aria-hidden="true">📍</div>
+        <div><div class="contact-label">Address</div><div class="contact-val">Main Bazaar, Dharamsala, HP</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" aria-hidden="true">💬</div>
+        <div><div class="contact-label">WhatsApp</div><div class="contact-val">+91 98765 43210</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" aria-hidden="true">📧</div>
+        <div><div class="contact-label">Email</div><div class="contact-val">hello@medcarepharma.in</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="testimonials" id="reviews" aria-label="Customer reviews">
+  <div class="testimonials-inner">
+    <div class="section-tag">Reviews</div>
+    <h2 class="section-title">What our customers say</h2>
+    <div class="reviews-grid">
+      <article class="review-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"The AI chatbot told me exactly which medicine to get for my son's fever at 2am. Incredible service!"</p>
+        <div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">R</div><div><div class="reviewer-name">Rahul Sharma</div><div class="reviewer-loc">Dharamsala</div></div></div>
+      </article>
+      <article class="review-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"Home delivery in under 90 minutes. Very professional and caring staff."</p>
+        <div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">P</div><div><div class="reviewer-name">Priya Mehta</div><div class="reviewer-loc">McLeod Ganj</div></div></div>
+      </article>
+      <article class="review-card">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <p class="review-text">"Best pharmacy in Dharamsala. They always have stock when others don't!"</p>
+        <div class="reviewer"><div class="reviewer-avatar" aria-hidden="true">A</div><div><div class="reviewer-name">Amit Thakur</div><div class="reviewer-loc">Dharamsala</div></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 MedCare Pharmacy, Dharamsala · Built with <span>♥</span> · Powered by AI</p>
+  <p style="margin-top:6px;font-size:11px;opacity:.6">Demo site built by Swapnil Thakur · swapnil_builds on Fiverr</p>
+</footer>
+
+<!-- CHATBOT -->
+<div class="chat-bubble" id="chatBubble">
+  <div class="chat-window" id="chatWindow" role="dialog" aria-label="AI Chat Assistant" aria-hidden="true">
+    <div class="chat-header">
+      <div class="chat-avatar" aria-hidden="true">💊</div>
+      <div>
+        <div class="chat-name">MedCare AI Assistant</div>
+        <div class="chat-status">● Online · Replies instantly</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite"></div>
+    <div class="quick-replies" id="quickReplies">
+      <button class="qr" onclick="sendQuick('Is paracetamol available?')">Paracetamol?</button>
+      <button class="qr" onclick="sendQuick('What are your timings?')">Timings</button>
+      <button class="qr" onclick="sendQuick('Do you deliver at home?')">Home delivery?</button>
+      <button class="qr" onclick="sendQuick('I have a fever, what medicine?')">Fever help</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about medicines, timings..." aria-label="Type your message" maxlength="300" onkeydown="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send" onclick="sendMessage()" aria-label="Send message">➤</button>
+    </div>
+  </div>
+  <button class="chat-toggle" onclick="toggleChat()" id="chatToggle" aria-label="Open AI chat assistant">💬</button>
+  <div class="unread" id="unreadBadge" aria-hidden="true">1</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
